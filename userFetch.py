@@ -1,4 +1,6 @@
-from requests import get, exceptions
+# Author: dare_devil_ex
+# Remainder: Changing credits doesn't make you a programmer from requests import get, exceptions
+
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 uName = input("Enter the username: ")

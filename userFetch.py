@@ -1,7 +1,17 @@
 from requests import get, exceptions
+from os import system as s
+from time import sleep as sl
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-uName = input("Enter the username: ")
+try:
+    if get("https://google.com").status_code == 200:
+        print("Internet connected!")
+        sl(0.6)
+        s("cls")
+except:
+    s("cls")
+    print("Connect to the internet :/")
+
 valid = 0
 invalid = 0
 
@@ -22,24 +32,28 @@ def wkaie(url):
         pass
 
 urls = []
-with open("./garage/links.txt", "r") as f:
+try:
+    uName = input("Enter the username: ")
     with open("./garage/links.txt", "r") as f:
-        for line in f:
-            line = line.strip()
-            if "github.com" in line:
-                url = line.replace("$username", uName.replace("_", "-"))
-            elif "facebook.com" in line:
-                url = line.replace("$username", uName.replace("_", "."))
-            elif "instagram.com" in line:
-                url = line.replace("$username", uName.replace("_", ""))
-            else:
-                url = line.replace("$username", uName)
-            urls.append(url)
+        with open("./garage/links.txt", "r") as f:
+            for line in f:
+                line = line.strip()
+                if "github.com" in line:
+                    url = line.replace("$username", uName.replace("_", "-"))
+                elif "facebook.com" in line:
+                    url = line.replace("$username", uName.replace("_", "."))
+                elif "instagram.com" in line:
+                    url = line.replace("$username", uName.replace("_", ""))
+                else:
+                    url = line.replace("$username", uName)
+                urls.append(url)
 
-with ThreadPoolExecutor(max_workers=10) as executor:
-    futures = [executor.submit(wkaie, url) for url in urls]
-    for future in as_completed(futures):
-        pass
-
-print("Scanning completed")
-print(f"{valid} valid URLs found!\n{invalid} invalid URLs found.")
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = [executor.submit(wkaie, url) for url in urls]
+        for future in as_completed(futures):
+            pass
+    print("Scanning completed")
+    print(f"{valid} valid URLs found!\n{invalid} invalid URLs found.")
+    
+except:
+    print("OOPS! something went wrong..")

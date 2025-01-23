@@ -1,4 +1,9 @@
+# Author: dare_devil_ex
+# Remainder: Changing credits doesn't make you a programmer from requests import get, exceptions
+
 from requests import get, exceptions
+from os import system as s
+from time import sleep as sl
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:

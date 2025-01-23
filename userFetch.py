@@ -1,6 +1,4 @@
 from requests import get, exceptions
-from os import system as s
-from time import sleep as sl
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:
